@@ -158,11 +158,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8869C771AC44EDE005C12D9 /* Build configuration list for PBXNativeTarget "JiveAuthenticatingHTTPProtocolDemo" */;
 			buildPhases = (
+				C607FDA3AC0282193D6AC086 /* [CP] Check Pods Manifest.lock */,
 				3862FDB753F7273D1C774D0C /* Check Pods Manifest.lock */,
 				B8869C501AC44EDE005C12D9 /* Sources */,
 				B8869C511AC44EDE005C12D9 /* Frameworks */,
 				B8869C521AC44EDE005C12D9 /* Resources */,
 				B087CFE9F554A056ADBD38B8 /* Copy Pods Resources */,
+				58473AA3D84A2A60AF2A59E8 /* [CP] Embed Pods Frameworks */,
+				254F829C50891B04D602F413 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -177,11 +180,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8869C7A1AC44EDE005C12D9 /* Build configuration list for PBXNativeTarget "JiveAuthenticatingHTTPProtocolDemoTests" */;
 			buildPhases = (
+				ACAA7D02BEE62CA598F74C08 /* [CP] Check Pods Manifest.lock */,
 				16FA01472970EF2EE70F25AC /* Check Pods Manifest.lock */,
 				B8869C691AC44EDE005C12D9 /* Sources */,
 				B8869C6A1AC44EDE005C12D9 /* Frameworks */,
 				B8869C6B1AC44EDE005C12D9 /* Resources */,
 				07B3942019F4A1B6BF4FDB26 /* Copy Pods Resources */,
+				82B8B22381D70354C13E6770 /* [CP] Embed Pods Frameworks */,
+				CD657CD8CA0B8F1D647CDB8F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -281,6 +287,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		254F829C50891B04D602F413 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-JiveAuthenticatingHTTPProtocolDemo/Pods-JiveAuthenticatingHTTPProtocolDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3862FDB753F7273D1C774D0C /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,6 +317,54 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		58473AA3D84A2A60AF2A59E8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-JiveAuthenticatingHTTPProtocolDemo/Pods-JiveAuthenticatingHTTPProtocolDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82B8B22381D70354C13E6770 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-JiveAuthenticatingHTTPProtocolDemoTests/Pods-JiveAuthenticatingHTTPProtocolDemoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACAA7D02BEE62CA598F74C08 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JiveAuthenticatingHTTPProtocolDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B087CFE9F554A056ADBD38B8 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,6 +378,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-JiveAuthenticatingHTTPProtocolDemo/Pods-JiveAuthenticatingHTTPProtocolDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C607FDA3AC0282193D6AC086 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JiveAuthenticatingHTTPProtocolDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD657CD8CA0B8F1D647CDB8F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-JiveAuthenticatingHTTPProtocolDemoTests/Pods-JiveAuthenticatingHTTPProtocolDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
