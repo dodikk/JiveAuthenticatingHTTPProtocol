@@ -295,13 +295,11 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
     
     if (shouldAccept)
     {
-        // why `YES &&` ? That should be equivalent to plain `[scheme isEqual:@"http"]`
-        //
-        shouldAccept = YES && [scheme isEqual:@"http"];
+        shouldAccept = [scheme isEqual:@"http"];
         
         if ( ! shouldAccept )
         {
-            shouldAccept = YES && [scheme isEqual:@"https"];
+            shouldAccept = [scheme isEqual:@"https"];
         }
         
         if ( ! shouldAccept )
@@ -309,8 +307,12 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
             [self authenticatingHTTPProtocol:nil
                                logWithFormat:@"decline request %@ (scheme mismatch)"
                                , url];
-        } else {
-            [self authenticatingHTTPProtocol:nil logWithFormat:@"accept request %@", url];
+        }
+        else
+        {
+            [self authenticatingHTTPProtocol:nil
+                               logWithFormat:@"accept request %@"
+                               , url];
         }
     }
     
