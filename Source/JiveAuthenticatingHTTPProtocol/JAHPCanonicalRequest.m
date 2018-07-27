@@ -66,7 +66,10 @@
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-typedef CFIndex (*CanonicalRequestStepFunction)(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted);
+typedef CFIndex (*CanonicalRequestStepFunction)(
+    NSURL*         url          ,
+    NSMutableData* urlData      ,
+    CFIndex        bytesInserted);
 
 /*! The post-scheme separate should be "://"; if that's not the case, fix it.
  *  \param url The original URL to work on.
@@ -75,7 +78,10 @@ typedef CFIndex (*CanonicalRequestStepFunction)(NSURL *url, NSMutableData *urlDa
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-static CFIndex FixPostSchemeSeparator(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted)
+static CFIndex FixPostSchemeSeparator(
+    NSURL*         url          ,
+    NSMutableData* urlData      ,
+    CFIndex        bytesInserted)
 {
     CFRange     range;
     uint8_t *   urlDataBytes;
@@ -129,7 +135,10 @@ static CFIndex FixPostSchemeSeparator(NSURL *url, NSMutableData *urlData, CFInde
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-static CFIndex LowercaseScheme(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted)
+static CFIndex LowercaseScheme(
+    NSURL*         url          ,
+    NSMutableData* urlData      ,
+    CFIndex        bytesInserted)
 {
     CFRange     range;
     uint8_t *   urlDataBytes;
@@ -159,7 +168,10 @@ static CFIndex LowercaseScheme(NSURL *url, NSMutableData *urlData, CFIndex bytes
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-static CFIndex LowercaseHost(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted)
+static CFIndex LowercaseHost(
+                             NSURL*         url          ,
+                             NSMutableData* urlData      ,
+                             CFIndex        bytesInserted)
 // The host should be lower case; if it's not, make it so.
 {
     CFRange     range;
@@ -190,7 +202,10 @@ static CFIndex LowercaseHost(NSURL *url, NSMutableData *urlData, CFIndex bytesIn
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-static CFIndex FixEmptyHost(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted)
+static CFIndex FixEmptyHost(
+    NSURL*         url          ,
+    NSMutableData* urlData      ,
+    CFIndex        bytesInserted)
 {
     CFRange     range;
     CFRange     rangeWithSeparator;
@@ -225,7 +240,10 @@ static CFIndex FixEmptyHost(NSURL *url, NSMutableData *urlData, CFIndex bytesIns
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-static CFIndex FixEmptyPath(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted)
+static CFIndex FixEmptyPath(
+    NSURL*         url          ,
+    NSMutableData* urlData      ,
+    CFIndex        bytesInserted)
 {
     CFRange     range;
     CFRange     rangeWithSeparator;
@@ -259,15 +277,19 @@ static CFIndex FixEmptyPath(NSURL *url, NSMutableData *urlData, CFIndex bytesIns
  *  \returns An updated value of bytesInserted or kCFNotFound if the URL must be reparsed.
  */
 
-__attribute__((unused)) static CFIndex DeleteDefaultPort(NSURL *url, NSMutableData *urlData, CFIndex bytesInserted)
+__attribute__((unused))
+static CFIndex DeleteDefaultPort(
+    NSURL*         url          ,
+    NSMutableData* urlData      ,
+    CFIndex        bytesInserted)
 {
-    NSString *  scheme;
-    BOOL        isHTTP;
-    BOOL        isHTTPS;
-    CFRange     range;
-    uint8_t *   urlDataBytes;
+    NSString *  scheme       ;
+    BOOL        isHTTP       ;
+    BOOL        isHTTPS      ;
+    CFRange     range        ;
+    uint8_t *   urlDataBytes ;
     NSString *  portNumberStr;
-    int         portNumber;
+    int         portNumber   ;
     
     assert(url != nil);
     assert(urlData != nil);
