@@ -1,5 +1,5 @@
 PODS:
-  - JiveAuthenticatingHTTPProtocol (0.1.0)
+  - JiveAuthenticatingHTTPProtocol (0.3.2)
 
 DEPENDENCIES:
   - JiveAuthenticatingHTTPProtocol (from `.`)
@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: .
 
 SPEC CHECKSUMS:
-  JiveAuthenticatingHTTPProtocol: 5223eaf916686e4721f8bdddabb18a43c92c4304
+  JiveAuthenticatingHTTPProtocol: a03624807be75741a09ae59e66cd6c00328716e8
 
-COCOAPODS: 0.36.0
+PODFILE CHECKSUM: c036104d53eaf980d211b6037c43c2109689e42b
+
+COCOAPODS: 1.4.0

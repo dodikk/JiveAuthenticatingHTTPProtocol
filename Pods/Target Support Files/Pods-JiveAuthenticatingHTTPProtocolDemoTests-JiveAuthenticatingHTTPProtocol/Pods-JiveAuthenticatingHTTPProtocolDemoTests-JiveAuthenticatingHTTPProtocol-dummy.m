@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_JiveAuthenticatingHTTPProtocolDemoTests_JiveAuthenticatingHTTPProtocol : NSObject
-@end
-@implementation PodsDummy_Pods_JiveAuthenticatingHTTPProtocolDemoTests_JiveAuthenticatingHTTPProtocol
-@end
