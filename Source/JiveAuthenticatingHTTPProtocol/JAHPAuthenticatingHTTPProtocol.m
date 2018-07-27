@@ -323,7 +323,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
 {
     NSURLRequest *      result;
     
-    assert(request != nil);
+    NSParameterAssert(request != nil);
     // can be called on any thread
     
     // Canonicalising a request is quite complex, so all the heavy lifting has
@@ -338,9 +338,9 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
 
 - (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client
 {
-    assert(request != nil);
+    NSParameterAssert(request != nil);
     // cachedResponse may be nil
-    assert(client != nil);
+    NSParameterAssert(client != nil);
     // can be called on any thread
     
     NSMutableURLRequest *mutableRequest = [request mutableCopy];
@@ -378,9 +378,9 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
 {
     // can be called on any thread
     [[self class] authenticatingHTTPProtocol:self logWithFormat:@"dealloc"];
-    assert(self->_task == nil);                     // we should have cleared it by now
-    assert(self->_pendingChallenge == nil);         // we should have cancelled it by now
-    assert(self->_pendingChallengeCompletionHandler == nil);    // we should have cancelled it by now
+    NSParameterAssert(self->_task == nil);                     // we should have cleared it by now
+    NSParameterAssert(self->_pendingChallenge == nil);         // we should have cancelled it by now
+    NSParameterAssert(self->_pendingChallengeCompletionHandler == nil);    // we should have cancelled it by now
 }
 
 - (void)startLoading
@@ -392,8 +392,8 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
     // At this point we kick off the process of loading the URL via NSURLSession.
     // The thread that calls this method becomes the client thread.
     
-    assert(self.clientThread == nil);           // you can't call -startLoading twice
-    assert(self.task == nil);
+    NSParameterAssert(self.clientThread == nil);           // you can't call -startLoading twice
+    NSParameterAssert(self.task == nil);
     
     // Calculate our effective run loop modes.  In some circumstances (yes I'm looking at
     // you UIWebView!) we can be called from a non-standard thread which then runs a
@@ -404,7 +404,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
     // For debugging purposes the non-standard mode is "WebCoreSynchronousLoaderRunLoopMode"
     // but it's better not to hard-code that here.
     
-    assert(self.modes == nil);
+    NSParameterAssert(self.modes == nil);
     calculatedModes = [NSMutableArray array];
     [calculatedModes addObject:NSDefaultRunLoopMode];
     currentMode = [[NSRunLoop currentRunLoop] currentMode];
@@ -412,13 +412,13 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
         [calculatedModes addObject:currentMode];
     }
     self.modes = calculatedModes;
-    assert([self.modes count] > 0);
+    NSParameterAssert([self.modes count] > 0);
     
     // Create new request that's a clone of the request we were initialised with,
     // except that it has our 'recursive request flag' property set on it.
     
     recursiveRequest = [[self request] mutableCopy];
-    assert(recursiveRequest != nil);
+    NSParameterAssert(recursiveRequest != nil);
     
     [[self class] setProperty:@YES
                        forKey:kJAHPRecursiveRequestFlagProperty
@@ -449,7 +449,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
     self.task = [sharedDemux dataTaskWithRequest:recursiveRequest
                                         delegate:self
                                            modes:self.modes];
-    assert(self.task != nil);
+    NSParameterAssert(self.task != nil);
     
     [self.task resume];
 }
@@ -465,7 +465,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
                                logWithFormat:@"stop (elapsed %.1f)"
                                , timeElapsed];
     
-    assert(self.clientThread != nil);           // someone must have called -startLoading
+    NSParameterAssert(self.clientThread != nil);           // someone must have called -startLoading
     
     // Check that we're being stopped on the same thread that we were started
     // on.  Without this invariant things are going to go badly (for example,
@@ -477,7 +477,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
     // Rather, I rely on our client calling us on the right thread, which is what
     // the following assert is about.
     
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     [self cancelPendingChallenge];
     if (self.task != nil)
@@ -528,7 +528,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
 
 - (void)onThreadPerformBlock:(dispatch_block_t)block
 {
-    assert(block != nil);
+    NSParameterAssert(block != nil);
     block();
 }
 
@@ -610,7 +610,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
                                    logWithFormat:@"challenge %@ cancelled; other challenge pending"
                                    , strAuthMethod];
         // ???
-        assert(NO);
+        NSParameterAssert(NO);
         // ???
         
         [self clientThreadCancelAuthenticationChallenge:challenge
@@ -635,7 +635,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
             [[self class] authenticatingHTTPProtocol:self
                                        logWithFormat:@"challenge %@ cancelled; no delegate method"
                                        , strAuthMethod];
-            assert(NO);
+            NSParameterAssert(NO);
             [self clientThreadCancelAuthenticationChallenge:challenge
                                           completionHandler:completionHandler];
         }
@@ -761,7 +761,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
                                        , strAuthMethod];
             // If we managed to send a challenge to the client but can't cancel it, that's bad.
             // There's nothing we can do at this point except log the problem.
-            assert(NO);
+            NSParameterAssert(NO);
         }
         
     }]; // performOnThread
@@ -771,7 +771,7 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
 {
     // credential may be nil
     NSParameterAssert([NSThread isMainThread]);
-    assert(self.clientThread != nil);
+    NSParameterAssert(self.clientThread != nil);
     
     JAHPChallengeCompletionHandler completionHandler;
     NSURLAuthenticationChallenge* challenge;
@@ -817,8 +817,8 @@ static NSString * kJAHPRecursiveRequestFlagProperty = @"com.jivesoftware.JAHPAut
 
 - (void)cancelPendingAuthenticationChallenge
 {
-    assert([NSThread isMainThread]);
-    assert(self.clientThread != nil);
+    NSParameterAssert([NSThread isMainThread]);
+    NSParameterAssert(self.clientThread != nil);
     
     JAHPChallengeCompletionHandler  completionHandler;
     NSURLAuthenticationChallenge *challenge;
@@ -870,12 +870,12 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
     
 #pragma unused(session)
 #pragma unused(task)
-    assert(task == self.task);
-    assert(response != nil);
-    assert(newRequest != nil);
+    NSParameterAssert(task == self.task);
+    NSParameterAssert(response != nil);
+    NSParameterAssert(newRequest != nil);
 #pragma unused(completionHandler)
-    assert(completionHandler != nil);
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert(completionHandler != nil);
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     [[self class] authenticatingHTTPProtocol:self
                                logWithFormat:@"will redirect from %@ to %@"
@@ -890,7 +890,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
     // We also cancel our current connection because the client is going to start a new request for
     // us anyway.
     
-    assert([[self class] propertyForKey:kJAHPRecursiveRequestFlagProperty inRequest:newRequest] != nil);
+    NSParameterAssert([[self class] propertyForKey:kJAHPRecursiveRequestFlagProperty inRequest:newRequest] != nil);
     
     redirectRequest = [newRequest mutableCopy];
     [[self class] removePropertyForKey:kJAHPRecursiveRequestFlagProperty
@@ -941,10 +941,10 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
     
 #pragma unused(session)
 #pragma unused(task)
-    assert(task == self.task);
-    assert(challenge != nil);
-    assert(completionHandler != nil);
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert(task == self.task);
+    NSParameterAssert(challenge != nil);
+    NSParameterAssert(completionHandler != nil);
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     // Ask our delegate whether it wants this challenge.  We do this from this thread, not the main thread,
     // to avoid the overload of bouncing to the main thread for challenges that aren't going to be customised
@@ -1008,10 +1008,10 @@ didReceiveResponse:(NSURLResponse *)response
     
 #pragma unused(session)
 #pragma unused(dataTask)
-    assert(dataTask == self.task);
-    assert(response != nil);
-    assert(completionHandler != nil);
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert(dataTask == self.task);
+    NSParameterAssert(response != nil);
+    NSParameterAssert(completionHandler != nil);
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     // Pass the call on to our client.  The only tricky thing is that we have to decide on a
     // cache storage policy, which is based on the actual request we issued, not the request
@@ -1028,7 +1028,7 @@ didReceiveResponse:(NSURLResponse *)response
     }
     else
     {
-        assert(NO);
+        NSParameterAssert(NO);
         cacheStoragePolicy = NSURLCacheStorageNotAllowed;
         statusCode = 42;
     }
@@ -1063,9 +1063,9 @@ didReceiveResponse:(NSURLResponse *)response
     
 #pragma unused(session)
 #pragma unused(dataTask)
-    assert(dataTask == self.task);
-    assert(data != nil);
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert(dataTask == self.task);
+    NSParameterAssert(data != nil);
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     // Just pass the call on to our client.
     
@@ -1092,10 +1092,10 @@ didReceiveResponse:(NSURLResponse *)response
     
 #pragma unused(session)
 #pragma unused(dataTask)
-    assert(dataTask == self.task);
-    assert(proposedResponse != nil);
-    assert(completionHandler != nil);
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert(dataTask == self.task);
+    NSParameterAssert(proposedResponse != nil);
+    NSParameterAssert(completionHandler != nil);
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     // We implement this delegate callback purely for the purposes of logging.
     
@@ -1112,8 +1112,8 @@ didCompleteWithError:(NSError *)error
 {
 #pragma unused(session)
 #pragma unused(task)
-    assert( (self.task == nil) || (task == self.task) );        // can be nil in the 'cancel from -stopLoading' case
-    assert([NSThread currentThread] == self.clientThread);
+    NSParameterAssert( (self.task == nil) || (task == self.task) );        // can be nil in the 'cancel from -stopLoading' case
+    NSParameterAssert([NSThread currentThread] == self.clientThread);
     
     // Just log and then, in most cases, pass the call on to our client.
     
