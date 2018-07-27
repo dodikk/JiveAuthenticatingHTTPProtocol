@@ -89,15 +89,8 @@ canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
     self.authAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     [self.authAlertView show];
     
-//    JAHPDidCancelAuthenticationChallengeHandler logCancelEvent =
-//    ^void(JAHPAuthenticatingHTTPProtocol * __nonnull authenticatingHTTPProtocol,
-//          NSURLAuthenticationChallenge   * __nonnull challenge)
-//    {
-//        NSLog(@"=== JAHPDidCancelAuthenticationChallengeHandler")
-//    }
-    //return logCancelEvent;
-    
     return nil;
+    
 } // authenticatingHTTPProtocol:didReceiveAuthenticationChallenge:
 
 - (void)authenticatingHTTPProtocol:(JAHPAuthenticatingHTTPProtocol *)authenticatingHTTPProtocol
@@ -163,7 +156,6 @@ canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 -(void)handleAuthChallenge:(NSURLAuthenticationChallenge*)challenge
                forProtocol:(JAHPAuthenticatingHTTPProtocol*)authenticatingHTTPProtocol
 {
-    // TODO: maybe fix leaking `self`
     NSInteger cancelButtonIndex = self.authAlertView.cancelButtonIndex;
     
     [self.authAlertView dismissWithClickedButtonIndex: cancelButtonIndex
