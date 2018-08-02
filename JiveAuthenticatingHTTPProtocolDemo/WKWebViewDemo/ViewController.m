@@ -72,7 +72,6 @@ typedef void (^WKWebViewAuthChallengeBlock)(
     [self.webView loadRequest: request];
 }
 
-#pragma mark - JAHPAuthenticatingHTTPProtocolDelegate
 - (BOOL)shouldShowDialogForAuthorizationMethod:(NSString*)authorizationMethod
 {
     NSLog(@"shouldShowDialogForAuthorizationMethod: %@", authorizationMethod);
